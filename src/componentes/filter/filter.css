@@ -1,0 +1,38 @@
+.filter-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 50%;
+}
+
+.filter-emoji {
+  position: absolute;
+  left: 5px;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.main-filter {
+  padding: var(--padding-100);
+  font-size: 15px;
+  background-color: var(--color-200);
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filter-container.s .main-filter {
+  padding-left: 25px;
+  font-size: 12px;
+}
+
+.filter-container.m .main-filter {
+  padding-left: 30px;
+  font-size: 15px;
+}
+
+.filter-container.l .main-filter {
+  padding-left: 35px;
+  font-size: 18px;
+}
