@@ -1,38 +1,97 @@
-import { button } from './src/componentes/button/button'
-import { filter } from './src/componentes/filter/filter'
+import { Buttonav } from './src/componentes/button/button'
+
+Buttonav()
+
 import './style.css'
 
-const header = document.querySelector('#Home')
-const imgLogo = document.createElement('img')
-imgLogo.src = './src/assets/logo-icon.png'
-imgLogo.style.width = '30px'
-imgLogo.style.height = '30px'
-imgLogo.alt = 'Logo Pinterest'
-imgLogo.title = 'imagen Logo'
+const search = document.querySelector('.search')
+const searchword = document.querySelector('.search-word')
+const imagegalerry = document.querySelector('#galerry')
 
-header.innerHTML = `
-<div id="logo-container"></div>
-${button('Inicio', 'm', 'primary', 'class')}
-${button('Explorar', 'm', 'secondary', 'class')}
-${button('Crear', 'm', 'secondary', 'class')}
-${filter('🔎', 'Buscar...', 'm', 'search-input')}
- ${button(
-   'src/assets/campana_icon_1_ft4xve_Thumbnail.png',
-   'm',
-   'white',
-   'icono',
-   'campana',
-   'campana'
- )}
-  ${button(
-    'src/assets/mensaje_icon_1_edoigk.jpg',
-    'm',
-    'white',
-    'icono',
-    'mensaje',
-    'mensajes'
-  )}
-${button('D', 's', 'terciary', 'last-button')}
-`
-const logoContainer = header.querySelector('#logo-container')
-logoContainer.appendChild(imgLogo)
+let query = 'Random/backgrounds'
+let numberpage = getRandomPageNumber()
+
+searchword.addEventListener('submit', (e) => {
+  e.preventDefault()
+  query = search.value
+  imagegalerry.innerHTML = ''
+  numberpage = 1
+  performSearch(query, numberpage)
+})
+
+performSearch(query, numberpage)
+
+function performSearch(query, page) {
+  const gallerySection = document.querySelector('section')
+  gallerySection.innerHTML = ''
+
+  fetch(
+    `https://api.unsplash.com/search/photos?page=${page}&per_page=30&query=${query}&client_id=DKX8RFHjXo-PYoAveyuGV5a7gFdUXra8DvHlgOJPU8E`
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.results.length) {
+        printImages(res.results)
+      } else {
+        gallerySection.classList.add('gallery-error')
+        errorMenssage()
+      }
+    })
+}
+
+const gallerySection = document.querySelector('section')
+const printImages = (images) => {
+  for (const image of images) {
+    const img = document.createElement('img')
+    img.src = image.urls.regular
+    img.classList.add('style-img')
+    img.title = `Photo by ${image.user.name}`
+    gallerySection.appendChild(img)
+  }
+}
+
+const errorMenssage = () => {
+  const error = document.createElement('p')
+  error.textContent = 'No se existe es palabra'
+  error.classList.add('Message-error')
+
+  const newbutton = document.createElement('button')
+  newbutton.textContent = 'Intenta con otra palabra'
+  newbutton.addEventListener('click', () => {
+    location.reload()
+    window.scrollTo(0, 0)
+  })
+
+  gallerySection.appendChild(error)
+  gallerySection.appendChild(newbutton)
+}
+
+const Logo = document.querySelector('.logo')
+const Inicio = document.querySelector('.inicio')
+
+Inicio.addEventListener('click', () => {
+  location.reload()
+  window.scrollTo(0, 0)
+})
+
+Logo.addEventListener('click', () => {
+  location.reload()
+  window.scrollTo(0, 0)
+})
+
+const Divrecarga = document.querySelector('.Recarga')
+const Recargabutton = document.createElement('button')
+
+Recargabutton.textContent = 'Cargar más imagenes'
+Recargabutton.classList.add('Buttonrecarga')
+
+Divrecarga.appendChild(Recargabutton)
+
+Recargabutton.addEventListener('click', () => {
+  numberpage++
+  performSearch(query, numberpage)
+})
+
+function getRandomPageNumber() {
+  return Math.floor(Math.random() * 100) + 1
+}
