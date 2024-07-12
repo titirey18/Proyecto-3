@@ -6,25 +6,28 @@ import './style.css'
 
 const search = document.querySelector('.search')
 const searchword = document.querySelector('.search-word')
-const imagegalerry = document.querySelector('#galerry')
+const imagegallery = document.querySelector('#gallery')
 
 let query = 'Random/backgrounds'
 let numberpage = getRandomPageNumber()
 
+function getRandomPageNumber() {
+  return Math.floor(Math.random() * 100) + 1
+}
+
 searchword.addEventListener('submit', (e) => {
   e.preventDefault()
   query = search.value
-  imagegalerry.innerHTML = ''
+  imagegallery.innerHTML = ''
   numberpage = 1
   performSearch(query, numberpage)
 })
-
 performSearch(query, numberpage)
 
 function performSearch(query, page) {
   const gallerySection = document.querySelector('section')
   gallerySection.innerHTML = ''
-
+  console.log(query)
   fetch(
     `https://api.unsplash.com/search/photos?page=${page}&per_page=30&query=${query}&client_id=DKX8RFHjXo-PYoAveyuGV5a7gFdUXra8DvHlgOJPU8E`
   )
@@ -52,11 +55,11 @@ const printImages = (images) => {
 
 const errorMenssage = () => {
   const error = document.createElement('p')
-  error.textContent = 'No se existe es palabra'
+  error.textContent = 'No existe esa palabra'
   error.classList.add('Message-error')
 
   const newbutton = document.createElement('button')
-  newbutton.textContent = 'Intenta con otra palabra'
+  newbutton.textContent = 'Intenta con otra...'
   newbutton.addEventListener('click', () => {
     location.reload()
     window.scrollTo(0, 0)
@@ -91,7 +94,3 @@ Recargabutton.addEventListener('click', () => {
   numberpage++
   performSearch(query, numberpage)
 })
-
-function getRandomPageNumber() {
-  return Math.floor(Math.random() * 100) + 1
-}

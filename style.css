@@ -51,12 +51,14 @@ body {
   gap: var(--gap-300);
 }
 
-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--gap-200);
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 20px;
   margin: 150px 50px 150px 50px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .style-img {
@@ -79,9 +81,19 @@ section {
 .Message-error {
   color: var(--color-500);
   font-size: 1.2em;
-  margin-top: var(--rtc-margin-xxl);
   font-size: x-large;
   text-align: center;
+}
+
+#gallery > button {
+  padding: var(--padding-100);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#gallery > button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .Recarga {
@@ -100,34 +112,40 @@ section {
   border-radius: 15px;
   padding: var(--padding-100);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  animation: animationRecarga 0.2s forwards;
 }
 
 .Buttonrecarga:hover {
   transform: scale(1.1);
 }
 
-.Hidden {
-  display: none;
-}
-
-@keyframes animationHeader {
+@keyframes animationRecarga {
   0% {
-    transform: translateY(-1000px);
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 
-@media (max-width: 1362px) {
-  .icono {
-    display: none;
+@media (max-width: 480px) {
+  #searchForm {
+    width: 90%;
+  }
+  #gallery {
+    width: 90%;
+    margin: auto;
+    padding: 100px;
+    gap: var(--gap-300);
+  }
+  header img {
+    width: 25px;
+    height: 25px;
   }
 }
 
-@media (max-width: 982px) {
-  .main-button {
-    display: none;
-  }
-
-  .last-button {
-    display: inline-block;
+@media (max-width: 375px) {
+  #gallery {
+    margin-top: var(--margin-200);
   }
 }

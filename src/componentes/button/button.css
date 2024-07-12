@@ -47,6 +47,7 @@ ul > li:hover {
 }
 
 .search {
+  flex-grow: 1;
   height: 40px;
   width: 95%;
   background-color: var(--color-200);
@@ -58,4 +59,33 @@ img {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+@media (max-width: 1153px) {
+  .search {
+    width: auto;
+  }
+}
+
+@media (max-width: 1362px) {
+  #Home > img {
+    display: none;
+  }
+  #Home > .logo {
+    display: block;
+  }
+}
+@media (max-width: 982px) {
+  #Home > ul {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .search-word {
+    width: auto;
+  }
+
+  #Home {
+    max-width: 480px;
+  }
 }
