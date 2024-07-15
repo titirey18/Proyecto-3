@@ -1,6 +1,6 @@
-import './button.css'
+import './Header.css'
 
-export const Buttonav = () => {
+export const Headernav = () => {
   const header = document.querySelector('Header')
   const ul = document.createElement('ul')
   const Inicio = document.createElement('li')

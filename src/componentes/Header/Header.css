@@ -68,15 +68,15 @@ img {
 }
 
 @media (max-width: 1362px) {
-  #Home > img {
+  Header > img {
     display: none;
   }
-  #Home > .logo {
+  Header > .logo {
     display: block;
   }
 }
 @media (max-width: 982px) {
-  #Home > ul {
+  Header > ul {
     display: none;
   }
 }
@@ -85,7 +85,7 @@ img {
     width: auto;
   }
 
-  #Home {
+  Header {
     max-width: 480px;
   }
 }
